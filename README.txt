@@ -1,35 +1,18 @@
-THIS IS INCOMPLETE
+Struttura progetto 
+le msg queue sono semplici code bloccanti come nei semafori organizzate tramite id.
+i messaggi vengono inseriti nelle queue quindi vanno implementat get e put, come nei semafori 
+devo creare open close e unlink 
 
-In this folder
+Test 
+i test creeranno più code che scambiano messaggi di un qualche tipo
 
-- resource management system
-  we implemented the infrastructure to handle descriptors and files
-- a "resource is uniquely identified in the system
-  it can be created, opened or closed by one or more files
-  it keeps track of who is usingit
-- a process keeps track of the open resources through descriptors
 
-1. the resource structures and allocation
-   files: disastrOS_resource.*
+Diario tesi 
+giorno 1 :
+implementato il mqueue.c e .h nei quali ho definito la struttura della mqueue e le funzioni di alloc free e init, aggiunte le sys call al.h.
+va crato il mq descriptor.h e aggiornato il mqueue.h aggiungendo il byid.
 
-2. the descriptor structures and allocation
-   files: disastrOS_resource.*
+giorno 2 :
+aggiornati tutti i .h e aggiunte le sys call e cose di questo tipo per poter procedere con la programmazione delle funzioni
 
-3. the PCB is modified by adding a list of open descriptors
-   files: pcb.h, pcb.c
 
-4. the resources appear in the global variables
-   files: disastrOS.c
-
-5. new system calls to manage resources
-   files:
-   - disastrOS_syscalls.h
-   - disastrOS_resource_open.c
-   - disastrOS_resource_close.c
-   - disastrOS_resource_destroy.c
-
-6. new syscalls are added to the infrastructure
-   files:
-   - disastrOS.c
-     functions:
-     -disastrOS_start

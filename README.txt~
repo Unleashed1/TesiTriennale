@@ -1,0 +1,13 @@
+Struttura progetto 
+le msg queue sono semplici code bloccanti come nei semafori organizzate tramite id.
+i messaggi vengono inseriti nelle queue quindi vanno implementat get e put, come nei semafori 
+devo creare open close e unlink 
+
+Test 
+i test creeranno più code che scambiano messaggi di un qualche tipo
+
+
+Diario tesi 
+giorno 1 :
+implementato il mqueue.c e .h nei quali ho definito la struttura della mqueue e le funzioni di alloc free e init, aggiunte le sys call al.h 
+

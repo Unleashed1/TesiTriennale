@@ -51,10 +51,7 @@
 #define DSOS_CALL_SEMCLOSE  12
 #define DSOS_CALL_SEMWAIT   13
 #define DSOS_CALL_SEMPOST   14
-#define DSOS_CALL_MQCLOSE   15
-#define DSOS_CALL_MQOPEN    16
-#define DSOS_CALL_MQGET	    17
-#define DSOS_CALL_MQPUT     18
+
 
 //resources
 #define DSOS_CREATE 0x1
