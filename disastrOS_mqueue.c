@@ -20,7 +20,7 @@ void Mqueue_init(){
             MAX_NUM_MQUEUE,
             _mqueue_buffer,
             MQUEUE_SIZE);
-    assert(! result);
+    assert(! res);
 }
 //promemoria per la alloc
 /// utilizza una lista di n elementi per implementare la queue
@@ -29,7 +29,7 @@ Mqueue* Mqueue_alloc(int mq_flags, int mq_maxmsg, int mq_msgsize, int mq_curmsgs
     if(!m) return 0 ;
     m->list.prev = m->list.next = 0;
     m->mq_flags = mq_flags;
-    m->mq_maxmsg = maxmsg;
+    m->mq_maxmsg = mq_maxmsg;
     m->mq_msgsize = mq_msgsize;
     m->mq_curmsgs = mq_curmsgs;
     List_init(&m->descriptors);
@@ -39,4 +39,37 @@ int Mqueue_free(Mqueue* m){
     assert(m->descriptors.first == 0);
     assert(m->descriptors.last == 0);
     return PoolAllocator_relaseBlock(&_mqueue_allocator, m);
+}
+
+Mqueue* MqueueList_byId(MqueueList* l , int id ){
+    ListItem* aux = l-> first ;
+    while(aux){
+        Mqueue* r =(Mqueue*)aux;
+        if(r->id == id){
+            return r ;
+        }
+        aux = aux->next;
+    }
+    return 0 ;
+}
+
+void Mqueue_print(Mqueue* r){
+  printf("id: %d, count:%d, pids:", r->id, r->count);
+  DescriptorPtrList_print(&r->descriptors);
+  printf("waiting: ");
+  DescriptorPtrList_print(&r->waiting_descriptors);
+}
+
+void MqueueList_print(ListHead* l){
+  ListItem* aux=l->first;
+  printf("{\n");
+  while(aux){
+    Mqueue* r=(Mqueue*)aux;
+    printf("\t");
+    Mqueue_print(r);
+    if(aux->next)
+      printf(",");
+    printf("\n");
+    aux=aux->next;
+    }
 }

@@ -1,5 +1,5 @@
 CC=gcc
-CCOPTS=--std=gnu99 -Wall
+CCOPTS=-std=c99 -Wall
 AR=ar
 
 HEADERS=disastrOS.h\
@@ -15,7 +15,7 @@ HEADERS=disastrOS.h\
 	linked_list.h\
 	pool_allocator.h\
 	disastrOS_mqdescriptor.h\
-	disastrOS_mqueue.h\
+	disastrOS_mqueue\
 
 OBJS=pool_allocator.o\
      linked_list.o\
