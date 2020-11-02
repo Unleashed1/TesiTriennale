@@ -4,6 +4,7 @@
 #include "pool_allocator.h"
 #include "linked_list.h"
 #include "disastrOS_mqueue.h"
+#include "disastrOS_constants.h"
 
 
 #define MQUEUE_SIZE sizeof(Mqueue)
@@ -24,21 +25,22 @@ void Mqueue_init(){
 }
 //promemoria per la alloc
 /// utilizza una lista di n elementi per implementare la queue
-Mqueue* Mqueue_alloc(int mq_flags, int mq_maxmsg, int mq_msgsize, int mq_curmsgs){
+Mqueue* Mqueue_alloc(int id, char mq_curmsgs[]){
     Mqueue* m=(Mqueue*) PoolAllocator_getBlock(&_mqueue_allocator);
     if(!m) return 0 ;
+    m->id = id ;
     m->list.prev = m->list.next = 0;
-    m->mq_flags = mq_flags;
-    m->mq_maxmsg = mq_maxmsg;
-    m->mq_msgsize = mq_msgsize;
-    m->mq_curmsgs = mq_curmsgs;
+    int i= 0 ;
+    for(;i<MAX_MSG_SIZE;i++){
+        m->mq_curmsgs[i] = mq_curmsgs[i];
+    }
     List_init(&m->descriptors);
     return m ;
 }
 int Mqueue_free(Mqueue* m){
     assert(m->descriptors.first == 0);
     assert(m->descriptors.last == 0);
-    return PoolAllocator_relaseBlock(&_mqueue_allocator, m);
+    return PoolAllocator_releaseBlock(&_mqueue_allocator, m);
 }
 
 Mqueue* MqueueList_byId(MqueueList* l , int id ){

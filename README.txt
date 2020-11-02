@@ -15,4 +15,13 @@ va crato il mq descriptor.h e aggiornato il mqueue.h aggiungendo il byid.
 giorno 2 :
 aggiornati tutti i .h e aggiunte le sys call e cose di questo tipo per poter procedere con la programmazione delle funzioni
 
+giorno 3 : 
+debug di tutto e compila, ho modificato mqueue.c e ho sistemato tutte quanti i problemi relativi a disastros.c e modificato gli errori nelle constants.
+
+giorno 4 : 
+
+finito il debug e creazione mq close e relativo debug 
+
+giorno 5 : 
+
 

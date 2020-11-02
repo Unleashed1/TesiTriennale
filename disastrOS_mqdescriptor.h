@@ -1,7 +1,7 @@
 #pragma once
 #include "linked_list.h"
 #include "disastrOS_pcb.h"
-#include "disstrOS_mqueue.h"
+#include "disastrOS_mqueue.h"
 
 struct MqDescriptorPtr;
 
@@ -19,3 +19,13 @@ typedef struct MqDescriptorPtr{
     MqDescriptor* descriptor;
 }MqDescriptorPtr;
 
+
+void MqDescriptor_init();
+MqDescriptor* MqDescriptor_alloc(int fd, Mqueue* res, PCB* pcb);
+int MqDescriptor_free(MqDescriptor* d);
+MqDescriptor*  MqDescriptorList_byFd(ListHead* l, int fd);
+void MqDescriptorList_print(ListHead* l);
+
+MqDescriptorPtr* MqDescriptorPtr_alloc(MqDescriptor* descriptor);
+int MqDescriptorPtr_free(MqDescriptorPtr* d);
+void MqDescriptorPtrList_print(ListHead* l);

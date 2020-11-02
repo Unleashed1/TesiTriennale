@@ -47,6 +47,13 @@ void childFunction(void* args){
   fs = disastrOS_semClose(fd);
   assert(!fs);
   printf("sem %d closed \n",disastrOS_getpid());
+
+  //MQUEUE TEST
+
+
+
+
+
   disastrOS_exit(disastrOS_getpid()+1);
 }
 
@@ -73,7 +80,7 @@ void initFunction(void* args) {
   int retval;
   int pid;
   sh_sem = 2 * ready_list.size;
-  while(alive_children>0 && (pid=disastrOS_wait(0, &retval))>=0){ 
+  while(alive_children>0 && (pid=disastrOS_wait(0, &retval))>=0){
     disastrOS_printStatus();
     printf("initFunction, child: %d terminated, retval:%d, alive: %d \n",
 	   pid, retval, alive_children);
