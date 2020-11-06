@@ -49,8 +49,9 @@ void childFunction(void* args){
   printf("sem %d closed \n",disastrOS_getpid());
 
   //MQUEUE TEST
-
-
+  fs = disastrOS_mqopen(1);
+  fs = disastrOS_mqclose(fs);
+  printf("tutto secondo i piani");
 
 
 

@@ -17,7 +17,7 @@ void internal_mqOpen(){
 	}
 	//get an id for the mq from pcb
 	int id = running->syscall_args[0];
-    
+    int i = 0 ;
 
 	if(id<0) {
 		running->syscall_retvalue = DSOS_EMQOPEN_MQNUMVALUE;

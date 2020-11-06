@@ -50,3 +50,6 @@ int disastrOS_semOpen(int id);
 int disastrOS_semClose(int fd);
 int disastrOS_semPost(int fd);
 int disastrOS_semWait(int fd);
+// syscall for mq
+int disastrOS_mqopen;
+int disastrOS_mqclose;

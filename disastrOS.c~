@@ -14,8 +14,6 @@
 #include "disastrOS_descriptor.h"
 #include "disastrOS_semaphore.h"
 #include "disastrOS_semdescriptor.h"
-#include "disastrOS_mqdescriptor.h"
-#include "disastrOS_mqueue.h"
 
 FILE* log_file=NULL;
 PCB* init_pcb;
@@ -205,7 +203,7 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
 
   syscall_vector[DSOS_CALL_SEMOPEN]      = internal_mqOpen;
   syscall_numarg[DSOS_CALL_SEMOPEN]      = 1;
-
+  
   syscall_vector[DSOS_CALL_SEMOPEN]      = internal_semClose;
   syscall_numarg[DSOS_CALL_SEMOPEN]      = 1;
   // setup the scheduling lists

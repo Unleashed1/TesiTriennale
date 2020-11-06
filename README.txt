@@ -23,5 +23,5 @@ giorno 4 :
 finito il debug e creazione mq close e relativo debug 
 
 giorno 5 : 
-
+modificate varie cose controllare il make perchè non compila 
 
