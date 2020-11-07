@@ -33,11 +33,11 @@ void internal_semPost();
 
 void internal_semWait();
 
-void internal_mq_open();
+void internal_mqOpen();
 
-void internal_mq_close();
+void internal_mqClose();
 
-void internal_mq_get();
+void internal_mqRead();
 
-void internal_mq_put();
+void internal_mqWrite();
 

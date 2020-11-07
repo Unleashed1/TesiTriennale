@@ -42,7 +42,7 @@ void disastrOS_printStatus();
 /*
 int disastrOS_mq_close(int mq);
 int disastrOS_mq_put(int mqdest, int mqsource, char[] msg);
-int disastrOS_mq_open(const int id, int mq_flags, int mq_maxmsg, int mq_msgsize, int mq_curmsg);
+int disastrOS_mq_open(co nst int id, int mq_flags, int mq_maxmsg, int mq_msgsize, int mq_curmsg);
 int disastrOS_mq_get(int mqdest);
 */
 // syscall for semaphores
@@ -51,5 +51,5 @@ int disastrOS_semClose(int fd);
 int disastrOS_semPost(int fd);
 int disastrOS_semWait(int fd);
 // syscall for mq
-int disastrOS_mqopen;
-int disastrOS_mqclose;
+int disastrOS_mqOpen(int id);
+int disastrOS_mqClose(int fd);
