@@ -33,7 +33,7 @@ void internal_mqClose(){
   //Before return the syscall success(0),check if there are another process that could be on mq
   if(m->descriptors.size==0) {
 	  //cast
-	  m = (Mqueue*)List_detach(&mqueue_list,(ListItem*)m);
+	  m = (Mqueue*)List_detach(&mq_list,(ListItem*)m);
 	  assert(m);
 	  Mqueue_free(m);
   }

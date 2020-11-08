@@ -1,6 +1,9 @@
 #include <assert.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <assert.h>
+#include <unistd.h>
+#include <stdio.h>
 #include "disastrOS.h"
 #include "disastrOS_syscalls.h"
 #include "disastrOS_mqueue.h"
@@ -17,7 +20,7 @@ void internal_mqOpen(){
 	}
 	//get an id for the mq from pcb
 	int id = running->syscall_args[0];
-    
+
 
 	if(id<0) {
 		running->syscall_retvalue = DSOS_EMQOPEN_MQNUMVALUE;
@@ -25,16 +28,16 @@ void internal_mqOpen(){
 	}
 
 	// Check if the mqueue is already open  if not we add it in the list (we alloc first obv.)
-	Mqueue* mq = MqueueList_byId((MqueueList*)&mqueue_list, id);
+	Mqueue* mq = MqueueList_byId((MqueueList*)&mq_list, id);
 	if(!mq) {
 		mq = Mqueue_alloc(id,NULL);
 		assert(mq);
-		List_insert(&mqueue_list, mqueue_list.last, (ListItem*)mq);
+		List_insert(&mq_list, mq_list.last, (ListItem*)mq);
 	}
 
 	//Now alloc the MqDescriptor
 	MqDescriptor* mq_desc = MqDescriptor_alloc(running->last_mq_fd,mq,running);
-	assert(mq);
+	assert(mq_desc);
 
 
 	//Then alloc mqDescriptorPtr for mq_desc && update fd amd ptr

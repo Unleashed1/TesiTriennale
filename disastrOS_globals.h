@@ -14,10 +14,11 @@ extern ListHead waiting_list; // list of the waiting processes
 extern ListHead zombie_list;  // zombies
 extern ListHead resources_list; // resources
 extern ListHead semaphores_list; //semaphore list
-extern ListHead mqueue_list; //mqueue list
+extern ListHead mq_list; //mqueue list
 extern ListHead timer_list;     //timers (concrete)
 extern volatile int disastrOS_time; //global time of disastrOS
 
+extern int sh_mq;
 extern int sh_sem;
 // a resource can be a device, a file or an ipc thing
 

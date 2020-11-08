@@ -26,6 +26,7 @@ ListHead waiting_list;
 ListHead zombie_list;
 ListHead timer_list;
 int sh_sem;
+int sh_mq;
 // a resource can be a device, a file or an ipc thing
 ListHead resources_list;
 
@@ -319,10 +320,16 @@ int disastrOS_closeResource(int fd) {
 int disastrOS_destroyResource(int resource_id) {
   return disastrOS_syscall(DSOS_CALL_DESTROY_RESOURCE, resource_id);
 }
-
+int disastrOS_mqOpen(int id) {
+  return disastrOS_syscall(DSOS_CALL_MQOPEN, id);
+}
+int disastrOS_mqClose(int id) {
+  return disastrOS_syscall(DSOS_CALL_MQCLOSE, id);
+}
 int disastrOS_semOpen(int id) {
   return disastrOS_syscall(DSOS_CALL_SEMOPEN, id);
 }
+//inserire read e write
 
 int disastrOS_semClose(int fd) {
   return disastrOS_syscall(DSOS_CALL_SEMCLOSE, fd);

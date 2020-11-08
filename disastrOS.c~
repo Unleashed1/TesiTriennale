@@ -14,6 +14,8 @@
 #include "disastrOS_descriptor.h"
 #include "disastrOS_semaphore.h"
 #include "disastrOS_semdescriptor.h"
+#include "disastrOS_mqdescriptor.h"
+#include "disastrOS_mqueue.h"
 
 FILE* log_file=NULL;
 PCB* init_pcb;
@@ -24,6 +26,7 @@ ListHead waiting_list;
 ListHead zombie_list;
 ListHead timer_list;
 int sh_sem;
+int sh_mq;
 // a resource can be a device, a file or an ipc thing
 ListHead resources_list;
 
@@ -203,7 +206,7 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
 
   syscall_vector[DSOS_CALL_SEMOPEN]      = internal_mqOpen;
   syscall_numarg[DSOS_CALL_SEMOPEN]      = 1;
-  
+
   syscall_vector[DSOS_CALL_SEMOPEN]      = internal_semClose;
   syscall_numarg[DSOS_CALL_SEMOPEN]      = 1;
   // setup the scheduling lists
@@ -317,10 +320,16 @@ int disastrOS_closeResource(int fd) {
 int disastrOS_destroyResource(int resource_id) {
   return disastrOS_syscall(DSOS_CALL_DESTROY_RESOURCE, resource_id);
 }
-
+int disastrOS_mqOpen(int id) {
+  return disastrOS_syscall(DSOS_CALL_MQOPEN, id);
+}
+int disastrOS_mqClose(int id) {
+  return disastrOS_syscall(DSOS_CALL_MQCLOSE, id);
+}
 int disastrOS_semOpen(int id) {
   return disastrOS_syscall(DSOS_CALL_SEMOPEN, id);
 }
+//inserire read e write
 
 int disastrOS_semClose(int fd) {
   return disastrOS_syscall(DSOS_CALL_SEMCLOSE, fd);

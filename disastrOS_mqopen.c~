@@ -17,7 +17,7 @@ void internal_mqOpen(){
 	}
 	//get an id for the mq from pcb
 	int id = running->syscall_args[0];
-    int i = 0 ;
+
 
 	if(id<0) {
 		running->syscall_retvalue = DSOS_EMQOPEN_MQNUMVALUE;
@@ -25,11 +25,11 @@ void internal_mqOpen(){
 	}
 
 	// Check if the mqueue is already open  if not we add it in the list (we alloc first obv.)
-	Mqueue* mq = MqueueList_byId((MqueueList*)&mqueue_list, id);
+	Mqueue* mq = MqueueList_byId((MqueueList*)&mq_list, id);
 	if(!mq) {
 		mq = Mqueue_alloc(id,NULL);
 		assert(mq);
-		List_insert(&mqueue_list, mqueue_list.last, (ListItem*)mq);
+		List_insert(&mq_list, mq_list.last, (ListItem*)mq);
 	}
 
 	//Now alloc the MqDescriptor

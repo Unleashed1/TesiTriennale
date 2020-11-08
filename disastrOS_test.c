@@ -50,7 +50,7 @@ void childFunction(void* args){
 
   //MQUEUE TEST
   int mq;
-  mq = disastrOS_mqOpen(1);
+  mq = disastrOS_mqOpen(sh_mq);
   assert(mq >= 0);
   mq = disastrOS_mqClose(mq);
   assert(!mq);
@@ -83,6 +83,7 @@ void initFunction(void* args) {
   disastrOS_printStatus();
   int retval;
   int pid;
+  sh_mq= 2* ready_list.size;
   sh_sem = 2 * ready_list.size;
   while(alive_children>0 && (pid=disastrOS_wait(0, &retval))>=0){
     disastrOS_printStatus();
