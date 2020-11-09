@@ -98,8 +98,8 @@ int disastrOS_syscall(int syscall_num, ...) {
 
   int nargs=syscall_numarg[syscall_num];
   va_start(ap,syscall_num);
-  int i =  0 ;
-  for (i; i<nargs; ++i){
+
+  for (int i = 0; i<nargs; ++i){
     running->syscall_args[i] = va_arg(ap,long int);
   }
   va_end(ap);
@@ -157,8 +157,7 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
   init_pcb=0;
 
   // populate the vector of syscalls and number of arguments for each syscall
-  int i = 0 ;
-  for (i; i<DSOS_MAX_SYSCALLS; ++i){
+  for (int i=0; i<DSOS_MAX_SYSCALLS; ++i){
     syscall_vector[i]=0;
   }
   syscall_vector[DSOS_CALL_PREEMPT]   = internal_preempt;
@@ -204,11 +203,11 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
   syscall_vector[DSOS_CALL_SEMWAIT]      = internal_semWait;
   syscall_numarg[DSOS_CALL_SEMWAIT]      = 1;
 
-  syscall_vector[DSOS_CALL_SEMOPEN]      = internal_mqOpen;
-  syscall_numarg[DSOS_CALL_SEMOPEN]      = 1;
+  syscall_vector[DSOS_CALL_MQOPEN]      = internal_mqOpen;
+  syscall_numarg[DSOS_CALL_MQOPEN]      = 1;
 
-  syscall_vector[DSOS_CALL_SEMOPEN]      = internal_semClose;
-  syscall_numarg[DSOS_CALL_SEMOPEN]      = 1;
+  syscall_vector[DSOS_CALL_MQCLOSE]      = internal_semClose;
+  syscall_numarg[DSOS_CALL_MQCLOSE]      = 1;
   // setup the scheduling lists
   running=0;
   List_init(&ready_list);

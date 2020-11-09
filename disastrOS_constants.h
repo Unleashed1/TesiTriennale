@@ -65,7 +65,7 @@
 #define DSOS_CALL_SEMPOST   14
 #define DSOS_CALL_MQCLOSE   15
 #define DSOS_CALL_MQOPEN    16
-#define DSOS_CALL_MQREAD	    17
+#define DSOS_CALL_MQREAD    17
 #define DSOS_CALL_MQ    18
 
 //resources
