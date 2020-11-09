@@ -25,6 +25,7 @@ OBJS=pool_allocator.o\
      disastrOS_descriptor.o\
      disastrOS_semaphore.o\
      disastrOS_semdescriptor.o\
+     disastrOS_mqdescriptor.o\
      disastrOS.o\
      disastrOS_fork.o\
      disastrOS_wait.o\

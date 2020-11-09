@@ -4,12 +4,12 @@
 #include "pool_allocator.h"
 #include "disastrOS_constants.h"
 
-#define MQDESCRIPTOR_SIZE sizeof(MQDescriptor)
+#define MQDESCRIPTOR_SIZE sizeof(MqDescriptor)
 #define MQDESCRIPTOR_MEMSIZE (sizeof(MqDescriptor)+sizeof(int))
 #define MAX_NUM_MQDESCRIPTORS (MAX_NUM_MQDESCRIPTORS_PER_PROCESS*MAX_NUM_PROCESSES)
 #define MQDESCRIPTOR_BUFFER_SIZE MAX_NUM_MQDESCRIPTORS*MQDESCRIPTOR_MEMSIZE
 
-#define MQESCRIPTORPTR_SIZE sizeof(MqDescriptorPtr)
+#define MQDESCRIPTORPTR_SIZE sizeof(MqDescriptorPtr)
 #define MQDESCRIPTORPTR_MEMSIZE (sizeof(MqDescriptorPtr)+sizeof(int))
 #define MQDESCRIPTORPTR_BUFFER_SIZE MAX_NUM_MQDESCRIPTORS*MQDESCRIPTORPTR_MEMSIZE
 
@@ -24,10 +24,10 @@ void MqDescriptor_init(){
 				MQDESCRIPTOR_SIZE,
 				MAX_NUM_PROCESSES,
 				_mq_descriptor_buffer,
-				mqDESCRIPTOR_BUFFER_SIZE);
+				MQDESCRIPTOR_BUFFER_SIZE);
   assert(! result);
 
-  result=PoolAllocator_init(& _ma_descriptor_ptr_allocator,
+  result=PoolAllocator_init(& _mq_descriptor_ptr_allocator,
 			    MQDESCRIPTORPTR_SIZE,
 			    MAX_NUM_PROCESSES,
 			    _mq_descriptor_ptr_buffer,
@@ -35,18 +35,18 @@ void MqDescriptor_init(){
   assert(! result);
 }
 
-MqDescriptor* MqDescriptor_alloc(int fd, Semaphore* res, PCB* pcb) {
+MqDescriptor* MqDescriptor_alloc(int fd, Mqueue* res, PCB* pcb) {
   MqDescriptor* d=(MqDescriptor*)PoolAllocator_getBlock(&_mq_descriptor_allocator);
   if (!d)
     return 0;
   d->list.prev=d->list.next=0;
   d->fd=fd;
-  d->mq=res;
+  d->mqueue=res;
   d->pcb=pcb;
   return d;
 }
 
-int MqDescriptor_free(SemDescriptor* d) {
+int MqDescriptor_free(MqDescriptor* d) {
   return PoolAllocator_releaseBlock(&_mq_descriptor_allocator, d);
 }
 
@@ -81,7 +81,7 @@ void MqDescriptorList_print(ListHead* l){
     MqDescriptor* d=(MqDescriptor*)aux;
     printf("(fd: %d, rid:%d)",
 	   d->fd,
-	   d->mq->id);
+	   d->mqueue->id);
     if(aux->next)
       printf(", ");
     aux=aux->next;
@@ -98,7 +98,7 @@ void MqDescriptorPtrList_print(ListHead* l){
     printf("(pid: %d, fd: %d, rid:%d)",
 	   d->descriptor->fd,
 	   d->descriptor->pcb->pid,
-	   d->descriptor->mq->id);
+	   d->descriptor->mqueue->id);
     if(aux->next)
       printf(", ");
     aux=aux->next;

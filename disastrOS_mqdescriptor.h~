@@ -25,7 +25,6 @@ MqDescriptor* MqDescriptor_alloc(int fd, Mqueue* res, PCB* pcb);
 int MqDescriptor_free(MqDescriptor* d);
 MqDescriptor*  MqDescriptorList_byFd(ListHead* l, int fd);
 void MqDescriptorList_print(ListHead* l);
-MqDescriptorPtr* MqDescriptorPtr_alloc(MqDescriptor* descriptor)
 
 MqDescriptorPtr* MqDescriptorPtr_alloc(MqDescriptor* descriptor);
 int MqDescriptorPtr_free(MqDescriptorPtr* d);

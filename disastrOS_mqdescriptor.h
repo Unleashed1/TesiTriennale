@@ -8,7 +8,7 @@ struct MqDescriptorPtr;
 typedef struct MqDescriptor{
     ListItem list ;
     PCB* pcb;
-    Mqueue* queue;
+    Mqueue* mqueue;
     int fd ;
     struct MqDescriptorPtr* ptr ;
 } MqDescriptor;

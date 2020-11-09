@@ -3,7 +3,6 @@
 #include "disastrOS_pcb.h"
 #include "disastrOS_semaphore.h"
 
-
 struct SemDescriptorPtr;
 
 typedef struct SemDescriptor{
