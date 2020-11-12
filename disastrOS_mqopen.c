@@ -29,7 +29,6 @@ void internal_mqOpen(){
 		running->syscall_retvalue = DSOS_EMQOPEN_MQNUMVALUE;
 		return;
 	}
-
 	// Check if the mqueue is already open  if not we add it in the list (we alloc first obv.)
 	Mqueue* mq = MqueueList_byId((MqueueList*)&mq_list, id);
 	if(!mq) {

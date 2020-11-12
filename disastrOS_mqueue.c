@@ -4,7 +4,7 @@
 #include "pool_allocator.h"
 #include "linked_list.h"
 #include "disastrOS_mqueue.h"
-#include "disastrOS_constants.h"
+
 
 
 #define MQUEUE_SIZE sizeof(Mqueue)
@@ -29,9 +29,10 @@ void Mqueue_init(){
 /// utilizza una lista di n elementi per implementare la queue
 Mqueue* Mqueue_alloc(int id, int count){
     Mqueue* m=(Mqueue*) PoolAllocator_getBlock(&_mqueue_allocator);
-    if(!m) return 0 ;
+    if(!m){
+        return 0 ;
+    }
     m->id = id ;
-    m->list.prev = m->list.next = 0;
     m->count = count;
     List_init(&m->descriptors);
     return m ;
@@ -70,7 +71,7 @@ void MqueueList_print(ListHead* l){
     Mqueue_print(r);
     if(aux->next)
       printf(",");
-    printf("\n");
+    printf("}\n");
     aux=aux->next;
     }
 }

@@ -20,21 +20,19 @@ void Mqueue_init(){
             MQUEUE_SIZE,
             MAX_NUM_MQUEUE,
             _mqueue_buffer,
-            MQUEUE_SIZE);
+            MQUEUE_BUFFER_SIZE);
     assert(! res);
+   printf("%d",res);
+
 }
 //promemoria per la alloc
 /// utilizza una lista di n elementi per implementare la queue
-Mqueue* Mqueue_alloc(int id, char mq_curmsgs[]){
+Mqueue* Mqueue_alloc(int id, int count){
     Mqueue* m=(Mqueue*) PoolAllocator_getBlock(&_mqueue_allocator);
     if(!m) return 0 ;
     m->id = id ;
     m->list.prev = m->list.next = 0;
-    //int i= 0 ;
-    
-   /* for(;i<MAX_MSG_SIZE;i++){
-        m->mq_curmsgs[i] = mq_curmsgs[i];
-    }*/
+    m->count = count;
     List_init(&m->descriptors);
     return m ;
 }

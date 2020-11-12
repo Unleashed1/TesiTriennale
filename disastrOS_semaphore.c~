@@ -1,4 +1,6 @@
 #include <assert.h>
+#include <assert.h>
+#include <stdio.h>
 #include <stdio.h>
 #include "disastrOS_semaphore.h"
 #include "disastrOS_descriptor.h"
@@ -19,6 +21,7 @@ void Semaphore_init(){
 				  _semaphores_buffer,
 				  SEMAPHORE_BUFFER_SIZE);
     assert(! result);
+   printf("%d",result);
 }
 
 Semaphore* Semaphore_alloc(int id, int count){

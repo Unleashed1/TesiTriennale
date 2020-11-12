@@ -322,8 +322,8 @@ int disastrOS_destroyResource(int resource_id) {
 int disastrOS_mqOpen(int id) {
   return disastrOS_syscall(DSOS_CALL_MQOPEN, id);
 }
-int disastrOS_mqClose(int id) {
-  return disastrOS_syscall(DSOS_CALL_MQCLOSE, id);
+int disastrOS_mqClose(int fd) {
+  return disastrOS_syscall(DSOS_CALL_MQCLOSE, fd);
 }
 int disastrOS_semOpen(int id) {
   return disastrOS_syscall(DSOS_CALL_SEMOPEN, id);
