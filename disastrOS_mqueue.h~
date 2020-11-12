@@ -1,7 +1,6 @@
 #pragma once
 #include "linked_list.h"
 #include "disastrOS_pcb.h"
-#include "disastrOS_constants.h"
 
 typedef struct {
     int id ;
@@ -10,15 +9,15 @@ typedef struct {
     ListHead descriptors;
     //lista di descrittori in attesa
     ListHead waiting_descriptors;
-    ListItem list;
+    char msg[32][32];
    // char mq_curmsgs[MAX_MSG_SIZE] ;
 } Mqueue;
 
-void MqueueInit();
+void Mqueue_init();
 
 
 Mqueue* Mqueue_alloc(int id,int type);
-int Mqueue_free(Mqueue* queue);
+int Mqueue_free(Mqueue* mqueue);
 
 
 typedef ListHead MqueueList ;
