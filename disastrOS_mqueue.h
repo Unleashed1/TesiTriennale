@@ -13,7 +13,7 @@ typedef struct {
    // char mq_curmsgs[MAX_MSG_SIZE] ;
 } Mqueue;
 
-void MqueueInit();
+void Mqueue_init();
 
 
 Mqueue* Mqueue_alloc(int id,int type);

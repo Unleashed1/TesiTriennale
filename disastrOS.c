@@ -154,6 +154,8 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
   Descriptor_init();
   Semaphore_init();
   SemDescriptor_init();
+  Mqueue_init();
+  MqDescriptor_init();
   init_pcb=0;
 
   // populate the vector of syscalls and number of arguments for each syscall
@@ -206,8 +208,9 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
   syscall_vector[DSOS_CALL_MQOPEN]      = internal_mqOpen;
   syscall_numarg[DSOS_CALL_MQOPEN]      = 1;
 
-  syscall_vector[DSOS_CALL_MQCLOSE]      = internal_semClose;
-  syscall_numarg[DSOS_CALL_MQCLOSE]      = 1;
+  syscall_vector[DSOS_CALL_MQCLOSE]    = internal_mqClose;
+  syscall_numarg[DSOS_CALL_MQCLOSE]    = 1 ;
+
   // setup the scheduling lists
   running=0;
   List_init(&ready_list);

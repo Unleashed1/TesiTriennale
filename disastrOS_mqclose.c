@@ -21,7 +21,6 @@ void internal_mqClose(){
   }
 
   //Now remove it from the list, remove the ptr fom the list of descriptors && free resources
-
   List_detach(&running->mq_descriptors, (ListItem*)mq_desc);
   Mqueue* m = mq_desc->mqueue;
   assert(m);

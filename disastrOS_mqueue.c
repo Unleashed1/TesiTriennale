@@ -32,9 +32,10 @@ Mqueue* Mqueue_alloc(int id, int count){
     if(!m){
         return 0 ;
     }
-    m->id = id ;
-    m->count = count;
-    List_init(&m->descriptors);
+  m->list.prev=m->list.next=0;
+  m->id=id;
+  m->count=count;
+  List_init(&m->descriptors);
     return m ;
 }
 int Mqueue_free(Mqueue* m){
