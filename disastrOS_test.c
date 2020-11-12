@@ -30,7 +30,7 @@ void childFunction(void* args){
   }
   disastrOS_printStatus();
   for (int i=0; i<disastrOS_getpid()+1; i++){
-    int mq = disastrOS_mqClose(mq);
+    int mq = disastrOS_mqClose(i);
     assert(!mq);
     int fs = disastrOS_semClose(i);
     printf("%d : My job here is done\n",disastrOS_getpid());

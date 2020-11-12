@@ -65,6 +65,7 @@
 #define DSOS_CALL_MQCLOSE   15
 #define DSOS_CALL_MQOPEN    16
 #define DSOS_CALL_MQREAD    17
+#define DSOS_CALL_MQWRITE   18
 
 //resources
 #define DSOS_CREATE 0x1
