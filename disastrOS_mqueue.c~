@@ -30,10 +30,11 @@ Mqueue* Mqueue_alloc(int id, char mq_curmsgs[]){
     if(!m) return 0 ;
     m->id = id ;
     m->list.prev = m->list.next = 0;
-    int i= 0 ;
-    for(;i<32;i++){
+    //int i= 0 ;
+    
+   /* for(;i<MAX_MSG_SIZE;i++){
         m->mq_curmsgs[i] = mq_curmsgs[i];
-    }
+    }*/
     List_init(&m->descriptors);
     return m ;
 }

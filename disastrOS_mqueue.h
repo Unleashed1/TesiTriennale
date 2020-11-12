@@ -6,21 +6,19 @@
 typedef struct {
     int id ;
     int count;
-    char mq_msg_list[MAX_MSG_SIZE][MAX_MSG_NUM];
     //list di descrittori
     ListHead descriptors;
     //lista di descrittori in attesa
     ListHead waiting_descriptors;
     ListItem list;
-    char mq_curmsgs[MAX_MSG_SIZE] ;
+   // char mq_curmsgs[MAX_MSG_SIZE] ;
 } Mqueue;
 
-//DA IMPLEMENTARE
-void mqueueInit();
+void MqueueInit();
 
 
-Mqueue* Mqueue_alloc(int id, char mq_curmsgs[]);
-int Mqueue_free(Mqueue* queue);
+Mqueue* Mqueue_alloc(int id,int type);
+int Mqueue_free(Mqueue* mqueue);
 
 
 typedef ListHead MqueueList ;

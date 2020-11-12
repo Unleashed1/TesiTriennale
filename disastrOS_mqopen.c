@@ -33,7 +33,7 @@ void internal_mqOpen(){
 	// Check if the mqueue is already open  if not we add it in the list (we alloc first obv.)
 	Mqueue* mq = MqueueList_byId((MqueueList*)&mq_list, id);
 	if(!mq) {
-		mq = Mqueue_alloc(id,NULL);
+		mq = Mqueue_alloc(id,1);
 		assert(mq);
 		List_insert(&mq_list, mq_list.last, (ListItem*)mq);
 	}

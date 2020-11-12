@@ -1,4 +1,6 @@
 #include <assert.h>
+#include <assert.h>
+#include <stdio.h>
 #include <stdio.h>
 #include "disastrOS_semaphore.h"
 #include "disastrOS_descriptor.h"

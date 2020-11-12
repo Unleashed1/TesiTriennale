@@ -354,6 +354,8 @@ void disastrOS_printStatus(){
   ResourceList_print(&resources_list);
   printf("\nSemaphores: ");
   SemaphoreList_print(&semaphores_list);
+  printf("\nMqueue: ");
+  MqueueList_print(&mq_list);
   printf("\nReady: ");
   PCBList_print(&ready_list);
   printf("\nWaiting: ");
