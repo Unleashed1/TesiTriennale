@@ -22,8 +22,6 @@ void childFunction(void* args){
 //first and second for test the open and close and the rest of this func is going to test the shared sem situation
   printf("Hello, I am the child function %d\n",disastrOS_getpid());
   for (int i=0; i<(disastrOS_getpid()+1); i++){
-    int mq = disastrOS_mqOpen(i);
-    assert(mq>=0);
     int fs = disastrOS_semOpen(i);
     printf("%d : Hello i am the semaphore!\n",disastrOS_getpid());
     assert(fs >= 0);
@@ -51,7 +49,21 @@ void childFunction(void* args){
   fs = disastrOS_semClose(fd);
   assert(!fs);
   printf("sem %d closed \n",disastrOS_getpid());
-
+  for (int i=0; i<(disastrOS_getpid()+1); i++){
+    int mq = disastrOS_mqOpen(i);
+    printf("%d : Hello i am the Mqueue\n",disastrOS_getpid());
+    assert(mq >= 0);
+  }
+  for(int i = 0 ;i<(disastrOS_getpid()+1);i++){
+      int w = disastrOS_mqWrite(i,"ciao");
+      assert(!w);
+      print_msg(i);
+  }
+    for (int i=0; i<(disastrOS_getpid()+1); i++){
+    int mq = disastrOS_mqClose(i);
+    printf("%d : I leave the terminal, bye bye", disastrOS_getpid());
+    assert(!mq);
+  }
 
   disastrOS_exit(disastrOS_getpid()+1);
 }

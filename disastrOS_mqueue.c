@@ -35,6 +35,7 @@ Mqueue* Mqueue_alloc(int id, int count){
   m->list.prev=m->list.next=0;
   m->id=id;
   m->count=count;
+  m->pos = 31;
   List_init(&m->descriptors);
     return m ;
 }
@@ -75,4 +76,9 @@ void MqueueList_print(ListHead* l){
     printf("}\n");
     aux=aux->next;
     }
+void print_msg(Mqueue* m){
+	for(int i = 0 ;i<32;i++){
+        printf("%c",m->msg[m->pos][i]);
+    }
+}
 }

@@ -14,15 +14,22 @@ void internal_mqWrite(){
     // prelevo fd per prendere la queue e nella lista al suo interno metto
     // i messaggi e li prelevo con select dalla linked list
     MqDescriptor* mq_desc = MqDescriptorList_byFd(&running->mq_descriptors,fd);
+    int pos = mq_desc->mqueue->pos;
     if(!mq_desc){
         running->syscall_retvalue = DSOS_EMQWRITE_MQDESC_IS_NOT_IN_PROCESS;
         return;
     }
-    for(int i = 0 ; i<array_size;i++){
-// controllo se la coda è libera lo inserisco come primo messaggio
-// dopo di che vad o a scalare e la insert in coda la faccio con funzione aux di linked list
-// fino ad un max di 32
-//implementa controllo sulla lunghezza del messaggio
-//implementa controllo sul max num di messaggi
-        mq_desc->mqueue->msg[i][31]
+    if(pos == 0){
+        running->syscall_retvalue = DSOS_EMQWRITE_OUT_OF_BOUND;
+        return;
+    for(;pos>=0;pos--){
+    //da capire come prelevare la stringa
+        if( ""== ""){
+            for(int i =0 ; i<array_size ; i++){
+                mq_desc->mqueue->msg[pos][i] == msg[i];
+            }
+        }
+    }
+    running->syscall_retvalue = 0;
+    }
 }

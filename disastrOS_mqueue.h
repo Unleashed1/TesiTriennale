@@ -11,6 +11,7 @@ typedef struct {
     ListHead waiting_descriptors;
     ListItem list;
     char msg[32][32];
+    int pos;
    // char mq_curmsgs[MAX_MSG_SIZE] ;
 } Mqueue;
 
@@ -27,5 +28,5 @@ Mqueue* MqueueList_byId(MqueueList* l, int id) ;
 
 void MqueueList_print(ListHead* l);
 
-
+void print_msg(Mqueue m);
 
