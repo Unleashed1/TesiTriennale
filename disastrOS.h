@@ -53,4 +53,4 @@ int disastrOS_semWait(int fd);
 // syscall for mq
 int disastrOS_mqOpen(int id);
 int disastrOS_mqClose(int fd);
-int disastrOS_mqWrite(int fd, char msg[]);
+int disastrOS_mqWrite(int fd);

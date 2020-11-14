@@ -10,8 +10,7 @@ typedef struct {
     //lista di descrittori in attesa
     ListHead waiting_descriptors;
     ListItem list;
-    char msg[32][32];
-    int pos;
+    ListHead msg;
    // char mq_curmsgs[MAX_MSG_SIZE] ;
 } Mqueue;
 

@@ -3,7 +3,7 @@
 typedef struct ListItem {
   struct ListItem* prev;
   struct ListItem* next;
-  char msg[32];
+  char msg[15];
 } ListItem;
 
 typedef struct ListHead {
