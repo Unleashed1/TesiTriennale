@@ -211,6 +211,8 @@ void disastrOS_start(void (*f)(void*), void* f_args, char* logfile){
   syscall_vector[DSOS_CALL_MQCLOSE]    = internal_mqClose;
   syscall_numarg[DSOS_CALL_MQCLOSE]    = 1 ;
 
+  syscall_vector[DSOS_CALL_MQWRITE]    = internal_mqWrite;
+  syscall_numarg[DSOS_CALL_MQWRITE]    = 1 ;
   // setup the scheduling lists
   running=0;
   List_init(&ready_list);
@@ -328,9 +330,13 @@ int disastrOS_mqOpen(int id) {
 int disastrOS_mqClose(int fd) {
   return disastrOS_syscall(DSOS_CALL_MQCLOSE, fd);
 }
+int disastrOS_mqWrite(int fd) {
+  return disastrOS_syscall(DSOS_CALL_MQWRITE, fd);
+}
 int disastrOS_semOpen(int id) {
   return disastrOS_syscall(DSOS_CALL_SEMOPEN, id);
 }
+
 //inserire read e write
 
 int disastrOS_semClose(int fd) {

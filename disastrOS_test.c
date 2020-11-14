@@ -52,6 +52,12 @@ for (int i=0; i<(disastrOS_getpid()+1); i++){
     assert(mq>=0);
     printf("%d : Hello i am the mqueue!\n",disastrOS_getpid());
 }
+for (int i=0; i<(disastrOS_getpid()+1); i++){
+    disastrOS_mqWrite(i);
+    printf("%d : I write a message!\n",disastrOS_getpid());
+
+    //inserire write e messaggio scritto
+}
   for (int i=0; i<disastrOS_getpid()+1; i++){
     int mq = disastrOS_mqClose(i);
     assert(!mq);

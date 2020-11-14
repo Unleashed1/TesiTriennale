@@ -6,7 +6,6 @@
 #include "disastrOS_mqueue.h"
 #include "disastrOS_mqdescriptor.h"
 #include "disastrOS_globals.h"
-#include "msg_list.h"
 
 void internal_mqWrite(){
    int fd = running->syscall_args[0];
@@ -18,21 +17,15 @@ void internal_mqWrite(){
         running->syscall_retvalue = DSOS_EMQWRITE_MQDESC_IS_NOT_IN_PROCESS;
         return;
     }
-    if(mq_desc->mqueue->msg.size == 32){
+    if(sizeof(mq_desc->mqueue->msg) == 32*32){
         running->syscall_retvalue = DSOS_EMQWRITE_OUT_OF_BOUND;
         return;
     }
 
     char aux[19] ={'m','e','s','s','a','g','g','i','o',' ','d','i',' ','p','r','o','v','a','\0'};
-    for(int i = sizeof(aux)/sizeof(char)-1; i>=0;i--){
-        mq_desc->mqueue->msg.first->msg[i] = aux[i];
+    for(int i = 0; i<sizeof(aux)/sizeof(char);i++){
+        mq_desc->mqueue->msg[1][i] = aux[i];
     }
-    int size = sizeof(aux)/sizeof(char)-1;
-    for(int i = 0; i<size;i++){
-        printf("il messaggio è : %c",mq_desc->mqueue->msg.first->msg[i]);
-    }
-
-
     running->syscall_retvalue = 0;
 
 }
