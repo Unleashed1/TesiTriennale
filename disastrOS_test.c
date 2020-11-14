@@ -47,24 +47,16 @@ void childFunction(void* args){
   fs = disastrOS_semClose(fd);
   assert(!fs);
   printf("sem %d closed \n",disastrOS_getpid());
-
-  for (int i=0; i<(disastrOS_getpid()+1); i++){
+for (int i=0; i<(disastrOS_getpid()+1); i++){
     int mq = disastrOS_mqOpen(i);
-    printf("%d : Hello i am the Mqueue\n",disastrOS_getpid());
-    assert(mq >= 0);
-  }/*
-  for(int i = 0 ;i<(disastrOS_getpid()+1);i++){
-      int w = disastrOS_mqWrite(i);
-      assert(w!=0);
-
-  }*/
-  for (int i=0; i<(disastrOS_getpid()+1); i++){
-    int mq = disastrOS_mqClose(i);
-    printf("%d : I leave the terminal, bye bye\n", disastrOS_getpid());
-    printf("%d",mq);
-    assert(!mq);
+    assert(mq>=0);
+    printf("%d : Hello i am the mqueue!\n",disastrOS_getpid());
 }
-
+  for (int i=0; i<disastrOS_getpid()+1; i++){
+    int mq = disastrOS_mqClose(i);
+    assert(!mq);
+    printf("%d : I leave the terminal, bye bye \n", disastrOS_getpid());
+}
   disastrOS_exit(disastrOS_getpid()+1);
 }
 

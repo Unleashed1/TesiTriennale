@@ -1,7 +1,7 @@
 #pragma once
 #include "linked_list.h"
 #include "disastrOS_pcb.h"
-
+#include "msg_list.h"
 typedef struct {
     int id ;
     int count;
@@ -10,7 +10,7 @@ typedef struct {
     //lista di descrittori in attesa
     ListHead waiting_descriptors;
     ListItem list;
-    ListHead msg;
+    msgHead msg;
    // char mq_curmsgs[MAX_MSG_SIZE] ;
 } Mqueue;
 
@@ -27,5 +27,5 @@ Mqueue* MqueueList_byId(MqueueList* l, int id) ;
 
 void MqueueList_print(ListHead* l);
 
-void print_msg(Mqueue m);
+
 
