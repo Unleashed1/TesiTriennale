@@ -37,8 +37,7 @@ PoolAllocatorResult PoolAllocator_init(PoolAllocator* a,
   a->free_list= (int*)(memory_block+item_size*num_items); // the lower part is for bookkeeping
 
   // now we populate the free list by constructing a linked list
-  int i =  0 ;
-  for (i; i<a->size-1; ++i){
+  for (int i =0; i<a->size-1; ++i){
     a->free_list[i]=i+1;
   }
   // set the last element to "NULL"

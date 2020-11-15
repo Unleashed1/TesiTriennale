@@ -54,3 +54,4 @@ int disastrOS_semWait(int fd);
 int disastrOS_mqOpen(int id);
 int disastrOS_mqClose(int fd);
 int disastrOS_mqWrite(int fd);
+int disastrOS_mqRead(int fd);

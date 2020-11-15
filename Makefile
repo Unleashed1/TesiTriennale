@@ -45,7 +45,7 @@ OBJS=pool_allocator.o\
      disastrOS_mqueue.o\
      disastrOS_mqclose.o\
      disastrOS_mqwrite.o\
-
+     disastrOS_mqread.o\
 
 
 

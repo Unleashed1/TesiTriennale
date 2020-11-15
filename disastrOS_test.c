@@ -3,7 +3,8 @@
 #include <unistd.h>
 #include <poll.h>
 #include <assert.h>
-
+#include "disastrOS_mqueue.h"
+#include "disastrOS_mqdescriptor.h"
 #include "disastrOS.h"
 #include "disastrOS_globals.h"
 
@@ -47,6 +48,8 @@ void childFunction(void* args){
   fs = disastrOS_semClose(fd);
   assert(!fs);
   printf("sem %d closed \n",disastrOS_getpid());
+ printf("DEBUG");
+
 for (int i=0; i<(disastrOS_getpid()+1); i++){
     int mq = disastrOS_mqOpen(i);
     assert(mq>=0);
@@ -55,8 +58,12 @@ for (int i=0; i<(disastrOS_getpid()+1); i++){
 for (int i=0; i<(disastrOS_getpid()+1); i++){
     disastrOS_mqWrite(i);
     printf("%d : I write a message!\n",disastrOS_getpid());
-
-    //inserire write e messaggio scritto
+    MqDescriptor* mq_desc = MqDescriptorList_byFd(&running->mq_descriptors,i);
+    if(mq_desc->mqueue->id != i) break;
+    for(int j = 0 ; j<19 ;j++){
+        printf("%c",mq_desc->mqueue->msg[j]);
+    }
+    printf("\n");
 }
   for (int i=0; i<disastrOS_getpid()+1; i++){
     int mq = disastrOS_mqClose(i);
@@ -72,9 +79,9 @@ void initFunction(void* args) {
   printf("hello, I am init and I just started\n");
   disastrOS_spawn(sleeperFunction, 0);
 
-  printf("I feel like to spawn 10 nice threads\n");
+  printf("I feel like to spawn 5 nice threads\n");
   int alive_children=0;
-  for (int i=0; i<10; ++i) {
+  for (int i=0; i<4; ++i) {
     int type=0;
     int mode=DSOS_CREATE;
     printf("mode: %d\n", mode);
