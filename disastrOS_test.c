@@ -48,7 +48,8 @@ void childFunction(void* args){
   fs = disastrOS_semClose(fd);
   assert(!fs);
   printf("sem %d closed \n",disastrOS_getpid());
- printf("DEBUG");
+
+printf("***********************************************\n\n");
 
 for (int i=0; i<(disastrOS_getpid()+1); i++){
     int mq = disastrOS_mqOpen(i);
